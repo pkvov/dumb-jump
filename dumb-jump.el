@@ -1263,6 +1263,47 @@ or most optimal searcher."
            :regex "mod\\s+JJJ\\s*[{]?"
            :tests ("mod test;" "pub mod test {"))
 
+    ;; vb
+    ;;Variable Declarations
+    (:type "variable" :supports ("rg" "grep") :language "vb"
+           :regex "\\bDim\\s+JJJ\\s+As\\s+[^=\\n]+"
+           :tests ("Dim test As Integer"
+                   "Dim test As String"
+                   "Dim test As Object"))
+
+    (:type "variable" :supports ("rg" "grep") :language "vb"
+           :regex "\\bConst\\s+JJJ\\s+As\\s+[^=\\n]+\\s*=[^=\\n]+"
+           :tests ("Const test As Integer = 123"
+                   "Const test As String = \"Hello\""))
+
+    ;;Function Definitions
+
+    (:type "function" :supports ("rg" "grep") :language "vb"
+           :regex "\\bFunction\\s+JJJ\\s*\\("
+           :tests ("Function test() As Integer"
+                   "Function test(x As Integer, y As Integer) As String"
+                   "Private Function test() As Boolean"))
+
+    (:type "function" :supports ("rg" "grep") :language "vb"
+           :regex "\\bSub\\s+JJJ\\s*\\("
+           :tests ("Sub test()"
+                   "Sub test(x As Integer, y As Integer)"
+                   "Private Sub test()"))
+    
+    ;;Class Definitions
+    (:type "type" :supports ("rg" "grep") :language "vb"
+           :regex "\\bClass\\s+JJJ\\s*"
+           :tests ("Class test"
+                   "Public Class test"
+                   "Private Class test"))
+
+    ;;Interface Definitions
+    (:type "type" :supports ("rg" "grep") :language "vb"
+           :regex "\\bInterface\\s+JJJ\\s*"
+           :tests ("Interface test"
+                   "Public Interface test"
+                   "Private Interface test"))
+
     ;; elixir
     (:type "function" :supports ("ag" "grep" "rg" "git-grep") :language "elixir"
            :regex "\\bdef(p)?\\s+JJJ\\s*[ ,\\\(]"
@@ -1647,6 +1688,7 @@ or most optimal searcher."
     (:language "ruby" :ext "rake" :agtype "ruby" :rgtype nil)
     (:language "ruby" :ext "slim" :agtype "ruby" :rgtype nil)
     (:language "rust" :ext "rs" :agtype "rust" :rgtype "rust")
+    (:language "vb" :ext "vb" :agtype "vb" :rgtype "vb")
     (:language "zig" :ext "zig" :agtype nil :rgtype "zig")
     (:language "scad" :ext "scad" :agtype nil :rgtype nil)
     (:language "scala" :ext "scala" :agtype "scala" :rgtype "scala")
@@ -2330,6 +2372,7 @@ current file."
     (:comment "--" :language "haskell")
     (:comment "--" :language "lua")
     (:comment "//" :language "rust")
+    (:comment "'" :language "vb")
     (:comment "#"  :language "julia")
     (:comment "//" :language "objc")
     (:comment "//" :language "csharp")
